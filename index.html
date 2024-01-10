@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCraftify Prototype</title>
+    <style>
+        #app {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            cursor: pointer;
+            padding: 5px;
+            margin: 5px;
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <h1>CodeHelper Prototype</h1>
+        <textarea v-model="code" @input="handleCodeInput"></textarea>
+
+        <ul v-if="suggestions.length">
+            <li v-for="suggestion in suggestions" @click="insertSuggestion(suggestion)">{{ suggestion }}</li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                code: '',
+                suggestions: ['console.log()', 'for (let i = 0; i < 10; i++) {}', 'function myFunction() {}']
+            },
+            methods: {
+                handleCodeInput() {
+                    // In a real scenario, you would make a backend API call to get suggestions
+                    // and update this.suggestions based on the response.
+                },
+                insertSuggestion(suggestion) {
+                    // Insert the selected suggestion into the code textarea
+                    this.code += suggestion;
+                    // Clear suggestions
+                    this.suggestions = [];
+                }
+            }
+        });
+    </script>
+</body>
+</html>
